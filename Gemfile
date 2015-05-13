@@ -12,7 +12,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 end
 
-group :test do
+group :development, :test do
   gem 'rspec'
+  gem 'rspec-rails'
   gem 'test-unit'
 end

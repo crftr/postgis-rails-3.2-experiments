@@ -2,14 +2,14 @@
 
 This is a Rails 3.2.x proof-of-concept application.
 
-Its purpose is to demonstrate how to use the Postgis extensions for Postgresql.
+Its purpose is to demonstrate how to use the PostGIS extensions for Postgresql through a simple example of business locations.
+
+*Most of this guide was sourced from the [activerecord-postgis-adapter guide process](https://github.com/rgeo/activerecord-postgis-adapter/blob/2.0-stable/README.md)*
 
 
 ## Setup
 
-Using this library requires a little extra work.  But it's not difficult.
-
-This app was configured by following the [activerecord-postgis-adapter guide process](https://github.com/rgeo/activerecord-postgis-adapter/blob/2.0-stable/README.md)
+Using the PostGIS extension requires a little extra work.  But it's not difficult.
 
 
 ### Database & Rails Configuration
@@ -30,7 +30,10 @@ development: &postgres
   timeout: 5000
 ```
 
-Run the following `rake` task to enable the Postgis extension in the database
+Run the following `rake` task to enable the PostGIS extension in the database
 ```bash
 rake db:gis:setup
 ```
+
+## Create Spatial Tables
+

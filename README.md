@@ -1,4 +1,4 @@
-# postgis-test
+# postgis-rails-3.2-experiments
 
 This is a Rails 3.2.x proof-of-concept application.
 
@@ -14,14 +14,12 @@ This app was configured by following the [activerecord-postgis-adapter guide pro
 
 ### Database & Rails Configuration
 
-#### Add the following configuration changes
-
-Gemfile
+Add to the `Gemfile`
 ```ruby
 gem 'activerecord-postgis-adapter'
 ```
 
-database.yml
+Change the adapter setting on `database.yml`
 ```ruby
 development: &postgres
   adapter: postgis
@@ -30,4 +28,9 @@ development: &postgres
   port: 5432
   pool: 25
   timeout: 5000
+```
+
+Run the following `rake` task to enable the Postgis extension in the database
+```bash
+rake db:gis:setup
 ```

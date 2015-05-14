@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Business.create!(:name => 'Miabella',     :latlong => 'POINT(-117.213755 33.169657)')
+Business.create!(:name => 'Space Needle', :latlong => 'POINT(-122.349341 47.620471)')

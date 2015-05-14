@@ -26,14 +26,42 @@ development: &postgres
   database: postgis-ft-dev
   host: localhost
   port: 5432
-  pool: 25
+  pool: 5
   timeout: 5000
+  schema_search_path: public
 ```
 
-Run the following `rake` task to enable the PostGIS extension in the database
+Create the current database and enable the PostGIS extension
 ```bash
-rake db:gis:setup
+$ rake db:create
+$ psql -c 'CREATE EXTENSION IF NOT EXISTS postgis;' -d postgis-ft-dev
+$ psql -c 'CREATE EXTENSION IF NOT EXISTS postgis;' -d postgis-ft-test
 ```
 
-## Create Spatial Tables
+## Generate Model for Business
+
+Use the Rails generators to create the basics
+```bash
+$ rails g scaffold Business name:string latlong:point
+```
+
+Edit the new migration to add additional constraints and an index
+```ruby
+class CreateBusinesses < ActiveRecord::Migration
+  def change
+    create_table :businesses do |t|
+      t.string :name
+      t.point :latlon, geographic: true
+
+      t.timestamps
+    end
+    add_index :businesses, :latlon, using: :gist
+  end
+end
+```
+
+Migrate the database
+```bash
+$ rake db:migrate
+```
 

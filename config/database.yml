@@ -5,6 +5,7 @@ development: &postgres
   port: 5432
   pool: 25
   timeout: 5000
+  schema_search_path: public
 
 test:
   <<: *postgres

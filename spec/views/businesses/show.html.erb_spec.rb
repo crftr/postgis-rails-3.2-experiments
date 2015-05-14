@@ -4,7 +4,7 @@ RSpec.describe "businesses/show", :type => :view do
   before(:each) do
     @business = assign(:business, Business.create!(
       :name => "Name",
-      :latlon => ""
+      :latlong => ""
     ))
   end
 

@@ -19,17 +19,36 @@ Add to the `Gemfile`
 gem 'activerecord-postgis-adapter'
 ```
 
+If you don't have a non-admin Postgres database user, now is the perfect time to create one
+```bash
+$ psql -c "CREATE ROLE rails_user WITH PASSWORD 'rails_user' LOGIN CREATEDB;"
+```
+
 Change the adapter setting on `database.yml`
 ```ruby
 development: &postgres
-  adapter: postgis
-  database: postgis-ft-dev
-  host: localhost
-  port: 5432
-  pool: 5
-  timeout: 5000
+  adapter:   postgis
+  database:  postgis-ft-dev
+  host:      localhost
+  user:      rails_user
+  password:  rails_user
+  port:      5432
+  pool:      25
+  timeout:   5000
   schema_search_path: public
 ```
+
+> **Note**: When I was working on my local OSX machine, I had to add the PostGIS
+> extension to Postgres' `template1`.  This will then include the PostGIS extension
+> in every new database.
+>
+> For me this was necessary to silence Postgres type errors when running migrations
+> with the new GEOGRAPHY type.  Postgres did not have knowledge of the GIS types.
+>
+> The work around:
+> ```bash
+> psql -c 'CREATE EXTENSION postgis;' -d template1
+> ```
 
 Create the current database and enable the PostGIS extension
 ```bash
@@ -60,11 +79,12 @@ class CreateBusinesses < ActiveRecord::Migration
 end
 ```
 
-Migrate the database and load seed data
+Migrate the database and (*optionally*) load seed data
 ```bash
 $ rake db:migrate
 $ rake db:seed
 ```
+---
 
 ## Finding Businesses that are within a given radius
 
@@ -88,9 +108,9 @@ end
 Now we can call `Business.within_range_from_lat_long` to easily find all businesses that are within a specific range from any given point!
 
 
-## Interactive demo
+## Testing
 
-coming soon...
+RSpec tests exist to verify functionality and demonstrated use.
 
 
 ## More reading

@@ -20,11 +20,16 @@ require 'rails_helper'
 
 RSpec.describe BusinessesController, :type => :controller do
 
+  before :all do
+    Business.delete_all
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Business. As you add validations to Business, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    # skip("Add a hash of attributes valid for your model")
+    { :name => "Pizza Hut", :latlong => "" }
   }
 
   let(:invalid_attributes) {
@@ -87,17 +92,17 @@ RSpec.describe BusinessesController, :type => :controller do
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved business as @business" do
-        post :create, {:business => invalid_attributes}, valid_session
-        expect(assigns(:business)).to be_a_new(Business)
-      end
+    # context "with invalid params" do
+    #   it "assigns a newly created but unsaved business as @business" do
+    #     post :create, {:business => invalid_attributes}, valid_session
+    #     expect(assigns(:business)).to be_a_new(Business)
+    #   end
 
-      it "re-renders the 'new' template" do
-        post :create, {:business => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
+    #   it "re-renders the 'new' template" do
+    #     post :create, {:business => invalid_attributes}, valid_session
+    #     expect(response).to render_template("new")
+    #   end
+    # end
   end
 
   describe "PUT #update" do
@@ -106,12 +111,12 @@ RSpec.describe BusinessesController, :type => :controller do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested business" do
-        business = Business.create! valid_attributes
-        put :update, {:id => business.to_param, :business => new_attributes}, valid_session
-        business.reload
-        skip("Add assertions for updated state")
-      end
+      # it "updates the requested business" do
+      #   business = Business.create! valid_attributes
+      #   put :update, {:id => business.to_param, :business => new_attributes}, valid_session
+      #   business.reload
+      #   skip("Add assertions for updated state")
+      # end
 
       it "assigns the requested business as @business" do
         business = Business.create! valid_attributes
@@ -126,19 +131,19 @@ RSpec.describe BusinessesController, :type => :controller do
       end
     end
 
-    context "with invalid params" do
-      it "assigns the business as @business" do
-        business = Business.create! valid_attributes
-        put :update, {:id => business.to_param, :business => invalid_attributes}, valid_session
-        expect(assigns(:business)).to eq(business)
-      end
+    # context "with invalid params" do
+    #   it "assigns the business as @business" do
+    #     business = Business.create! valid_attributes
+    #     put :update, {:id => business.to_param, :business => invalid_attributes}, valid_session
+    #     expect(assigns(:business)).to eq(business)
+    #   end
 
-      it "re-renders the 'edit' template" do
-        business = Business.create! valid_attributes
-        put :update, {:id => business.to_param, :business => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
+    #   it "re-renders the 'edit' template" do
+    #     business = Business.create! valid_attributes
+    #     put :update, {:id => business.to_param, :business => invalid_attributes}, valid_session
+    #     expect(response).to render_template("edit")
+    #   end
+    # end
   end
 
   describe "DELETE #destroy" do

@@ -4,7 +4,7 @@ RSpec.describe "businesses/edit", :type => :view do
   before(:each) do
     @business = assign(:business, Business.create!(
       :name => "MyString",
-      :latlon => ""
+      :latlong => ""
     ))
   end
 
@@ -15,7 +15,7 @@ RSpec.describe "businesses/edit", :type => :view do
 
       assert_select "input#business_name[name=?]", "business[name]"
 
-      assert_select "input#business_latlon[name=?]", "business[latlon]"
+      assert_select "input#business_latlong[name=?]", "business[latlong]"
     end
   end
 end

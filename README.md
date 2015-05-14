@@ -60,8 +60,12 @@ class CreateBusinesses < ActiveRecord::Migration
 end
 ```
 
-Migrate the database
+Migrate the database and load seed data
 ```bash
 $ rake db:migrate
+$ rake db:seed
 ```
 
+## More reading
+
+[Daniel Azuma's 9-part tutorial on working with geospatial operations in Rails](http://daniel-azuma.com/articles/georails)

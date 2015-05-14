@@ -20,3 +20,19 @@ Business.create!(:name => 'Benihana Carlsbad', :latlong => 'POINT(-117.31261 33.
 Business.create!(:name => 'Gaslamp Speakeasy', :latlong => 'POINT(-117.16137 32.71271)')
 Business.create!(:name => 'Petco Park', :latlong => 'POINT(-117.15704 32.70762)')
 Business.create!(:name => 'USS Midway', :latlong => 'POINT(-117.17506 32.71362)')
+
+
+
+## Need a lot of test data?
+#
+# ActiveRecord::Base.transaction do
+#   100_000.times { 
+#     Business.create(:name => rand(100..200_000).to_s, :latlong => "POINT(-#{rand(115..118)}.#{rand(10000..20000)} #{rand(30..33)}.#{rand(0..999)})")
+#   }
+# end
+#
+#
+## Need a test transaction check speed?
+#
+# b = Business.last
+# Business.within_range_from_lat_long(30_000, b.latitude, b.longitude).explain
